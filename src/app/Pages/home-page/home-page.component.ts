@@ -71,10 +71,15 @@ export class HomePageComponent implements OnInit {
   }
   
   // Todo:: need to switch currenciess
-  switchCurrencies() { 
+  switchCurrencies(event:any) {
+    event?.preventDefault();
     const formData:FormData = this.f();
-    console.log(`formData`,formData);
-    
+    const fromCurrency:string = formData['fromCurrency'];
+    const toCurrency:string = formData['toCurrency'];
+    this.exchangeForm.patchValue({
+      fromCurrency:toCurrency,
+      toCurrency:fromCurrency
+    });
   }
 
   getAvailebleCurrencies() {  
