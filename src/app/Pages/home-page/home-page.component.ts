@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
 
 interface Rates 
 {
   [key: string]: any; 
   name: string;
+}
+
+interface FormData {
+  toCurrency: string
+  fromCurrency: string
+  exchangeAmount: DoubleRange
 }
 interface Payload 
 {
@@ -21,19 +28,53 @@ interface Payload
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-
+  exchangeForm: FormGroup; 
+  exchangeRate: string='0.0'; 
   constructor(
     private fixerExchangeService: FixerExchangeService
-  ) { }
+  ) { 
+    this.exchangeForm = new FormGroup({
+      exchangeAmount: new FormControl(0, [Validators.required]),
+      fromCurrency: new FormControl('USD', [Validators.required]),
+      toCurrency: new FormControl('AED', [Validators.required]),
+    }); 
+  } 
+
   currencies: string[] = [];
 
   ngOnInit(): void {
     this.getAvailebleCurrencies()
   }
   
+  f() {
+    return this.exchangeForm.value;
+  }
+
+  ratesConvert() {
+    const formData:FormData = this.f();
+    this.fixerExchangeService.rateConvert(formData)
+    .subscribe({
+      next:(res:any)=> { 
+        this.exchangeRate = res?.result
+      },
+      error:(error)=>{
+        // console.log(`error`,error);
+      },
+      complete:()=>{
+        // console.log(`completed`);
+      }
+    });
+  }
+  
+  reset() {
+    // this.errors = {};
+  }
+  
   // Todo:: need to switch currenciess
-  switchCurrencies() {
-    console.log(`switch currencies`);
+  switchCurrencies() { 
+    const formData:FormData = this.f();
+    console.log(`formData`,formData);
+    
   }
 
   getAvailebleCurrencies() {  
@@ -41,12 +82,15 @@ export class HomePageComponent implements OnInit {
     .subscribe({
       next:(res:any)=> { 
         this.currencies = Object.keys(res?.rates);
-        console.log(`currencies`,this.currencies);
+        // console.log(`currencies`,this.currencies);
       },
       error:(error)=>{
-        console.log(`error`,error);
+        // console.log(`error`,error);
       },
-      complete:()=>{console.log(`completed`);}
-    })
+      complete:()=>{
+        // console.log(`completed`);
+      }
+    });
   }
+ 
 }
