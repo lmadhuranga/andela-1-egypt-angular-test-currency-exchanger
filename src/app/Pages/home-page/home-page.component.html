@@ -1,1 +1,37 @@
-<p>home-page works!</p>
+ <div class="home-page">
+    <div class="header">Header and navigtion</div>
+    <div class="exchange-calculator">
+        <input type="number" name="amount" id="amount">
+        <div class="from-dropdown">
+            <label>From</label>
+            <div>
+                <!-- logic && operator -->
+                <div *ngIf="currencies.length>0; else currencyNotLoaded ">
+                    <select >
+                        <option *ngFor="let currency of currencies" [value]="currency" >{{currency}}</option>
+                    </select>
+                </div>
+                <ng-template #currencyNotLoaded>
+                    Something went wrong
+                </ng-template>
+            </div>
+        </div>
+        <div class="switch-currency">
+            <button class="switch-currencies"  (click)="switchCurrencies()" ><= Switch =></button>
+        </div>
+        <div class="to-dropdown">
+            <label>To</label>
+            <div>
+                <!-- logic && operator -->
+                <div *ngIf="currencies.length>0; else currencyNotLoaded ">
+                    <select >
+                        <option *ngFor="let currency of currencies" [value]="currency" >{{currency}}</option>
+                    </select>
+                </div>
+                <ng-template #currencyNotLoaded>
+                    Something went wrong
+                </ng-template>
+            </div>
+        </div>
+    </div>
+ </div>
