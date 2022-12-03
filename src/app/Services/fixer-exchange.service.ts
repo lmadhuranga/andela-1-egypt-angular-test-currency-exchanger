@@ -8,6 +8,13 @@ interface FormData {
   exchangeAmount: DoubleRange
 }
 
+interface HistoryData {
+  toCurrency: string
+  fromCurrency: string
+  startDate: string
+  endDate: string 
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,5 +39,15 @@ export class FixerExchangeService {
   rateConvert(formData:FormData) {
     const { toCurrency, fromCurrency, exchangeAmount } = formData;    
     return this.http.get(`${this.apiUrl}/convert?to=${toCurrency}&from=${fromCurrency}&amount=${exchangeAmount}`);
+  }
+  
+  getHistoryData(historyData:HistoryData) {
+    const { toCurrency, fromCurrency, startDate, endDate } = historyData;    
+    return this.http.get(`${this.apiUrl}/timeseries?start_date=2021-12-03&end_date=2022-12-03&base=${fromCurrency}&symbols=${toCurrency}`);
+  } 
+  
+  getCurrenciesDetails(historyData:HistoryData) {
+    const { toCurrency, fromCurrency, startDate, endDate } = historyData;    
+    return this.http.get(`${this.apiUrl}/symbols`);
   } 
 }

@@ -29,21 +29,29 @@ interface Payload
 })
 export class HomePageComponent implements OnInit {
   exchangeForm: FormGroup; 
-  exchangeRate: string='0.0'; 
+  exchangeRate: string; 
+  currencies: string[];
+
   constructor(
     private fixerExchangeService: FixerExchangeService
   ) { 
+    this.exchangeRate = '0.0';
+    this.currencies = [];
+
     this.exchangeForm = new FormGroup({
       exchangeAmount: new FormControl(0, [Validators.required]),
       fromCurrency: new FormControl('USD', [Validators.required]),
       toCurrency: new FormControl('AED', [Validators.required]),
-    }); 
+    });
   } 
 
-  currencies: string[] = [];
-
+ 
   ngOnInit(): void {
-    this.getAvailebleCurrencies()
+    this.getAvailebleCurrencies();
+    // if form valu change rest to init state 
+    this.exchangeForm.valueChanges.subscribe(selectedValue  => {
+      this.reset();
+    })
   }
   
   f() {
@@ -68,9 +76,9 @@ export class HomePageComponent implements OnInit {
   
   reset() {
     // this.errors = {};
+    this.exchangeRate = '0.00';
   }
-  
-  // Todo:: need to switch currenciess
+   
   switchCurrencies(event:any) {
     event?.preventDefault();
     const formData:FormData = this.f();
@@ -96,6 +104,13 @@ export class HomePageComponent implements OnInit {
         // console.log(`completed`);
       }
     });
+  }
+
+  redirectToDetialesPage(event:any) {
+    event.preventDefault();
+    console.log(`reditc next page called`);
+    // Todo:: redirect to more detils page with 
+    // parameters amount base currency, target currency and amount
   }
  
 }
