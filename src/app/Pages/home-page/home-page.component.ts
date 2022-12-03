@@ -59,6 +59,7 @@ export class HomePageComponent implements OnInit {
   }
 
   ratesConvert() {
+    // Todo:: should be disable until input amount enter
     const formData:FormData = this.f();
     this.fixerExchangeService.rateConvert(formData)
     .subscribe({

@@ -6,11 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './Pages/home-page/home-page.component';
+import { MoreDetailsPageComponent } from './more-details-page/more-details-page.component';
  
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
+    MoreDetailsPageComponent,
   ],
   imports: [ 
     BrowserModule,
