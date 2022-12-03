@@ -1,0 +1,17 @@
+{
+    "data":{
+        "date": "2022-11-03",
+        "historical": true,
+        "info": {
+        "rate": 3.673103,
+        "timestamp": 1667519999
+        },
+        "query": {
+        "amount": 1,
+        "from": "USD",
+        "to": "AED"
+        },
+        "result": 3.673103,
+        "success": true
+    }
+}
