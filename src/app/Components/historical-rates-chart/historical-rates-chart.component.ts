@@ -25,11 +25,11 @@ export class HistoricalRatesChartComponent implements OnInit {
     const chartData:any = []
     datesArr.forEach((day, i) => { 
       if(datesArr.length> (i+1)) {
-        const currentMonth = day.split('-')[1]
-        const nextDayMonth = datesArr[(i+1)].split('-')[1]
-        console.log(`currentMonth`,currentMonth, nextDayMonth);
+        const currentMonth = day.split('-')[1];
+        const nextDayMonth = datesArr[(i+1)].split('-')[1];
         if(currentMonth!=nextDayMonth) {
-          chartData.push({...rawData[day], date:day})
+          const value = Object.values(rawData[day]).pop(); 
+          chartData.push({value, day})
         }
       } 
     });

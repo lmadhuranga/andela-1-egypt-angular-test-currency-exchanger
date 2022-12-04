@@ -1,5 +1,5 @@
 <div class="historical-rates-chart"> 
     <ul>
-        <li class="item" *ngFor="let record of historicData; index as i;" >{{record | json}}</li>
+        <li class="item" *ngFor="let record of historicData ; index as i;" > {{ record['day'] }} Rate {{ record['value']}}</li>
     </ul> 
 </div>
