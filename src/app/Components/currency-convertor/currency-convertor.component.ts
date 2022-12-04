@@ -122,7 +122,10 @@ export class CurrencyConvertorComponent implements OnInit {
 
   redirectToDetialesPage(event:any) {
     event.preventDefault();
-    console.log(`reditc next page called`);
+    
+    // Store in localstorage convert history
+    localStorage.setItem('convertHistory', JSON.stringify(this.convertHistory));
+
     // Redirect to more detils page with 
     // parameters amount base currency, target currency and amount
     const formData:FormData = this.f();

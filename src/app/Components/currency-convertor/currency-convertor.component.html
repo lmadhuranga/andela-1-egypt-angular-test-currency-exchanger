@@ -31,17 +31,17 @@
                 <ng-template #currencyNotLoaded>
                     Something went wrong
                 </ng-template>
-            </div>
+            </div>2323223
         </div>
         
         <div class="submit-btn">
-            <button type="submit">Convert</button>
+            <button type="submit" [disabled]="(f()['exchangeAmount']<1)" >Convert</button>
         </div>
         <div class="result">
             {{ exchangeRate | number : '1.2-2' }} {{ f()['toCurrency'] }}
         </div>
         <div class="submit-btn">
-            <button type="submit" (click)="redirectToDetialesPage($event)">More detiales</button>
+            <button [disabled]="(f()['exchangeAmount']<1)" type="submit" (click)="redirectToDetialesPage($event)">More detiales</button>
         </div>
         <div class="convert-history">
             <ul>
