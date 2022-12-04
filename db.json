@@ -177,19 +177,18 @@
         "timestamp": 1670051283
     },
     "convert":{
-        "date": "2022-11-03",
-        "historical": true,
-        "info": {
-            "rate": 3.673103,
-            "timestamp": 1667519999
-        },
-        "query": {
-            "amount": 1,
-            "from": "USD",
-            "to": "AED"
-        },
-        "result": 3.673103,
-        "success": true
+      "date": "2022-12-04",
+      "info": {
+        "rate": 1.053574,
+        "timestamp": 1670186043
+      },
+      "query": {
+        "amount": 20,
+        "from": "EUR",
+        "to": "USD"
+      },
+      "result": 21.07148,
+      "success": true
     },
     "timeseries": {
         "base": "USD",

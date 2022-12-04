@@ -36,6 +36,7 @@ export class CurrencyConvertorComponent implements OnInit {
 
   exchangeForm: FormGroup; 
   currencies:string[]; 
+  result: string; 
   exchangeRate: string; 
   convertHistory:FormData[];
 
@@ -44,6 +45,7 @@ export class CurrencyConvertorComponent implements OnInit {
     private router: Router
   ) {
      
+    this.result = '0.0';
     this.exchangeRate = '0.0';
     this.currencies = [];
 
@@ -84,7 +86,8 @@ export class CurrencyConvertorComponent implements OnInit {
     this.fixerExchangeService.rateConvert(formData)
     .subscribe({
       next:(res:any)=> { 
-        this.exchangeRate = res?.result;
+        this.result = res?.result;
+        this.exchangeRate = res?.info.rate;
         this.addToHistory.emit(formData);
       },
       error:(error)=>{

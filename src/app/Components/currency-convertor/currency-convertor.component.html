@@ -1,13 +1,33 @@
 
 <div class="currency-convertor">
-    <form [formGroup]="exchangeForm" (submit)="ratesConvert()">
-        <input type="number"  formControlName="exchangeAmount" class="exchange-amount">
-        <div class="from-dropdown">
-            <label>From</label>
-            <div>
-                <!-- logic && operator -->
+    <form class="" [formGroup]="exchangeForm" (submit)="ratesConvert()">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label for="inputCity" class="form-label">Amount</label> 
+                <input type="number"  class="form-control exchange-amount" formControlName="exchangeAmount" >
+            </div>
+
+            <div class="col-md-3">
+                <label for="inputState" class="form-label">From</label>
                 <div *ngIf="currencies.length>0; else currencyNotLoaded ">
-                    <select [attr.disabled]="isHomePage?null:true" formControlName="fromCurrency" class="from-currency">
+                    <select [attr.disabled]="isHomePage?null:true" formControlName="fromCurrency" class="form-select from-currency">
+                        <option *ngFor="let currency of currencies" [value]="currency" >{{currency}}</option>
+                    </select>
+                </div>
+                <ng-template #currencyNotLoaded>
+                    Something went wrong
+                </ng-template>
+            </div>
+
+            <div class="col-md-2"> 
+                <label>&nbsp;</label>
+                <button [disabled]="!isHomePage" class="form-control switch-currencies btn btn-primary"  (click)="onSwitchCurrencies($event)" ><= Switch =></button>
+            </div>
+
+            <div class="col-md-3">
+                <label for="inputState" class="form-label">To</label>
+                <div *ngIf="currencies.length>0; else currencyNotLoaded ">
+                    <select formControlName="toCurrency" class="form-select to-currency">
                         <option *ngFor="let currency of currencies" [value]="currency" >{{currency}}</option>
                     </select>
                 </div>
@@ -16,33 +36,21 @@
                 </ng-template>
             </div>
         </div>
-        <div class="switch-currency">
-            <button [disabled]="!isHomePage" class="switch-currencies"  (click)="onSwitchCurrencies($event)" ><= Switch =></button>
+        <div class="row p-3">
+            <div class="col-md-3 ">
+                <button class=" btn btn-primary" type="submit" [disabled]="(f()['exchangeAmount']<1)" >Convert</button>
+            </div>
         </div>
-        <div class="to-dropdown">
-            <label>To</label>
-            <div>
-                <!-- logic && operator -->
-                <div *ngIf="currencies.length>0; else currencyNotLoaded ">
-                    <select formControlName="toCurrency" class="to-currency">
-                        <option *ngFor="let currency of currencies" [value]="currency" >{{currency}}</option>
-                    </select>
-                </div>
-                <ng-template #currencyNotLoaded>
-                    Something went wrong
-                </ng-template>
-            </div>2323223
+        <div class="row p-3">
+            <div class="col-md-3 ">
+                <h4>{{ f()['exchangeAmount'] }} {{ f()['fromCurrency'] }} = {{ exchangeRate | number : '1.2-2' }} {{ f()['toCurrency'] }}</h4>
+            </div>
+            <div class="col-md-3 result">
+                <h4>{{ result | number : '1.2-2' }} {{ f()['toCurrency'] }}</h4>
+            </div>
+            <div *ngIf="isHomePage" class="col-md-3 ">
+                <button class="btn btn-primary" [disabled]="(f()['exchangeAmount']<1)" type="submit" (click)="redirectToDetialesPage($event)">More detiales</button>
+            </div>  
         </div>
-        
-        <div class="submit-btn">
-            <button type="submit" [disabled]="(f()['exchangeAmount']<1)" >Convert</button>
-        </div>
-        <div class="result">
-            {{ exchangeRate | number : '1.2-2' }} {{ f()['toCurrency'] }}
-        </div>
-        <div *ngIf="isHomePage" class="submit-btn">
-            <button [disabled]="(f()['exchangeAmount']<1)" type="submit" (click)="redirectToDetialesPage($event)">More detiales</button>
-        </div>
-        
     </form>
 </div>
