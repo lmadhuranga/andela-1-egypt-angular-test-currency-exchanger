@@ -1,5 +1,10 @@
 <div class="header">
-    <img class="logo" src="assets/img/logo.png">
-    <button class="btn" (click)="redirectToDetialesPage($event, 'EUR', 'USD')">EUR-USD Details</button>
-    <button class="btn" (click)="redirectToDetialesPage($event, 'EUR', 'GBP')">EUR-GBP Details</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <form class="container-fluid justify-content-start">
+            <img class="logo" src="assets/img/logo.png">
+            <button class="btn btn-outline-success me-2" (click)="redirectToDetialesPage($event, 'EUR', 'USD')">EUR-USD Details</button>
+            <button class="btn btn-outline-success me-2" (click)="redirectToDetialesPage($event, 'EUR', 'GBP')">EUR-GBP Details</button>
+        </form>
+    </nav>
+    
 </div>
