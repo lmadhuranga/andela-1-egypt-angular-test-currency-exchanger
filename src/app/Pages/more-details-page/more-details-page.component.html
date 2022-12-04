@@ -1,8 +1,8 @@
 <div class="more-details-page">
     <app-header></app-header>
-    <h1>More Details Page</h1>
+    <h1>{{ currencyFullName }}</h1>
     <button (click)="backToHomePage($event)">Back to Home</button>
-    <app-currency-convertor [currencies]="currencies" [isHomePage]="false"></app-currency-convertor>
+    <app-currency-convertor [currencies]="currencies" [isHomePage]="false" ></app-currency-convertor>
     <div class="historical-rates-chart">
         
     </div>  
