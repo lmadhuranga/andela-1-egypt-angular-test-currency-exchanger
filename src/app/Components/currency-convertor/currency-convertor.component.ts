@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
@@ -30,10 +30,9 @@ interface Payload
 })
 
 export class CurrencyConvertorComponent implements OnInit {
-
+  @Input() currencies:any;
   exchangeForm: FormGroup; 
-  exchangeRate: string; 
-  currencies: string[];
+  exchangeRate: string;
   // convertHistory:[{ fromCurrency: string, toCurrency: string }];
   convertHistory:FormData[];
 
@@ -55,8 +54,8 @@ export class CurrencyConvertorComponent implements OnInit {
   } 
 
  
-  ngOnInit(): void {
-    this.getAvailebleCurrencies();
+  ngOnInit(): void { 
+    console.log(`this.currencies`,this.currencies);
     // if form valu change rest to init state 
     this.exchangeForm.valueChanges.subscribe(selectedValue  => {
       this.reset();
@@ -104,21 +103,7 @@ export class CurrencyConvertorComponent implements OnInit {
     });
   }
 
-  getAvailebleCurrencies() {  
-    this.fixerExchangeService.getLatestRates()
-    .subscribe({
-      next:(res:any)=> { 
-        this.currencies = Object.keys(res?.rates);
-        // console.log(`currencies`,this.currencies);
-      },
-      error:(error)=>{
-        // console.log(`error`,error);
-      },
-      complete:()=>{
-        // console.log(`completed`);
-      }
-    });
-  }
+ 
 
   redirectToDetialesPage(event:any) {
     event.preventDefault();

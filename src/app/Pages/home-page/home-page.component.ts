@@ -10,12 +10,30 @@ import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
 })
 export class HomePageComponent implements OnInit {
  
-
-  constructor( ) { 
+  currencies: string[];
+  constructor( private fixerExchangeService :FixerExchangeService) {
+    this.currencies = []; 
   } 
 
  
   ngOnInit(): void {
-    
+    this.getAvailebleCurrencies()
   } 
+
+  getAvailebleCurrencies() {  
+    this.fixerExchangeService.getLatestRates()
+    .subscribe({
+      next:(res:any)=> { 
+        this.currencies = Object.keys(res?.rates);
+        // console.log(`currencies`,this.currencies);
+      },
+      error:(error)=>{
+        // console.log(`error`,error);
+      },
+      complete:()=>{
+        // console.log(`completed`);
+      }
+    });
+  }
+
 }
