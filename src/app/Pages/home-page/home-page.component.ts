@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
- 
+interface ExchangeFormData {
+  toCurrency?: string
+  fromCurrency?: string
+  exchangeAmount?: number
+}
 
 @Component({
   selector: 'app-home-page',
@@ -9,30 +13,19 @@ import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
- 
-  currencies: string[];
+
+  currencyConvertHistory:any[]; 
   constructor( private fixerExchangeService :FixerExchangeService) {
-    this.currencies = []; 
+    this.currencyConvertHistory = [];
   } 
+  
+  ngOnInit(): void { 
+  }
 
- 
-  ngOnInit(): void {
-    this.getAvailebleCurrencies()
-  } 
-
-  getAvailebleCurrencies() {  
-    this.fixerExchangeService.getLatestRates()
-    .subscribe({
-      next:(res:any)=> { 
-        this.currencies = Object.keys(res?.rates);
-        // console.log(`currencies`,this.currencies);
-      },
-      error:(error)=>{
-        // console.log(`error`,error);
-      },
-      complete:()=>{
-        // console.log(`completed`);
-      }
-    });
-  } 
+  // Todo:: Need to move to HOC method
+  onAddToHistory(formData:ExchangeFormData) {
+    this.currencyConvertHistory.push(formData);
+    // Save in the local storage for future use
+    localStorage.setItem('convertHistory', JSON.stringify(this.currencyConvertHistory))
+  }
 }

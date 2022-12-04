@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-convert-history',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./convert-history.component.css']
 })
 export class ConvertHistoryComponent implements OnInit {
-
+  @Input() convertHistory:any; 
   constructor() { }
 
   ngOnInit(): void {

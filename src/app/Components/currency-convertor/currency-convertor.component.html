@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="switch-currency">
-            <button class="switch-currencies"  (click)="switchCurrencies($event)" ><= Switch =></button>
+            <button class="switch-currencies"  (click)="onSwitchCurrencies($event)" ><= Switch =></button>
         </div>
         <div class="to-dropdown">
             <label>To</label>
@@ -43,10 +43,6 @@
         <div *ngIf="isHomePage" class="submit-btn">
             <button [disabled]="(f()['exchangeAmount']<1)" type="submit" (click)="redirectToDetialesPage($event)">More detiales</button>
         </div>
-        <div class="convert-history">
-            <ul>
-                <li *ngFor="let record of convertHistory; index as i;" >{{record | json}}</li>
-            </ul>
-        </div>
+        
     </form>
 </div>
