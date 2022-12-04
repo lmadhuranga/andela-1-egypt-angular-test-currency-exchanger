@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';  
 
 interface FormData {
-  toCurrency: string
-  fromCurrency: string
-  exchangeAmount: DoubleRange
+  toCurrency?: string
+  fromCurrency?: string
+  exchangeAmount?: number
 }
 
 interface HistoryData {

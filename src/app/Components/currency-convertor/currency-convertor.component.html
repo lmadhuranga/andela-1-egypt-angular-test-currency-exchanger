@@ -43,5 +43,10 @@
         <div class="submit-btn">
             <button type="submit" (click)="redirectToDetialesPage($event)">More detiales</button>
         </div>
+        <div class="convert-history">
+            <ul>
+                <li *ngFor="let record of convertHistory; index as i;" >{{record | json}}</li>
+            </ul>
+        </div>
     </form>
 </div>

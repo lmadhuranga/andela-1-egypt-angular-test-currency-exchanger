@@ -10,9 +10,9 @@ interface Rates
 }
 
 interface FormData {
-  toCurrency: string
-  fromCurrency: string
-  exchangeAmount: DoubleRange
+  toCurrency?: string
+  fromCurrency?: string
+  exchangeAmount?: number
 }
 interface Payload 
 {
@@ -28,17 +28,24 @@ interface Payload
   templateUrl: './currency-convertor.component.html',
   styleUrls: ['./currency-convertor.component.css']
 })
+
 export class CurrencyConvertorComponent implements OnInit {
+
   exchangeForm: FormGroup; 
   exchangeRate: string; 
   currencies: string[];
+  // convertHistory:[{ fromCurrency: string, toCurrency: string }];
+  convertHistory:FormData[];
 
   constructor(
     private fixerExchangeService: FixerExchangeService,
     private router: Router
-  ) { 
+  ) {
+     
     this.exchangeRate = '0.0';
     this.currencies = [];
+
+    this.convertHistory=[];  
 
     this.exchangeForm = new FormGroup({
       exchangeAmount: new FormControl(1, [Validators.required]),
@@ -63,6 +70,10 @@ export class CurrencyConvertorComponent implements OnInit {
   ratesConvert() {
     // Todo:: should be disable until input amount enter
     const formData:FormData = this.f();
+    const { fromCurrency, toCurrency } = formData;
+    // Added to history
+    this.convertHistory.unshift({ fromCurrency, toCurrency })
+    console.log(`this.convertHistory`,this.convertHistory);
     this.fixerExchangeService.rateConvert(formData)
     .subscribe({
       next:(res:any)=> { 
@@ -85,8 +96,8 @@ export class CurrencyConvertorComponent implements OnInit {
   switchCurrencies(event:any) {
     event?.preventDefault();
     const formData:FormData = this.f();
-    const fromCurrency:string = formData['fromCurrency'];
-    const toCurrency:string = formData['toCurrency'];
+    const fromCurrency:any = formData['fromCurrency'];
+    const toCurrency:any = formData['toCurrency'];
     this.exchangeForm.patchValue({
       fromCurrency:toCurrency,
       toCurrency:fromCurrency
@@ -112,7 +123,7 @@ export class CurrencyConvertorComponent implements OnInit {
   redirectToDetialesPage(event:any) {
     event.preventDefault();
     console.log(`reditc next page called`);
-    // Todo:: redirect to more detils page with 
+    // Redirect to more detils page with 
     // parameters amount base currency, target currency and amount
     const formData:FormData = this.f();
     const { fromCurrency, toCurrency, exchangeAmount } = formData; 
