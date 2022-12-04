@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="switch-currency">
-            <button class="switch-currencies"  (click)="onSwitchCurrencies($event)" ><= Switch =></button>
+            <button [disabled]="!isHomePage" class="switch-currencies"  (click)="onSwitchCurrencies($event)" ><= Switch =></button>
         </div>
         <div class="to-dropdown">
             <label>To</label>

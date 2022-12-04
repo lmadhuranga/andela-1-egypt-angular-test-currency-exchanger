@@ -38,7 +38,7 @@ export class MoreDetailsPageComponent implements OnInit {
     this.getAvailebleCurrencies(); 
     this.activatedRoute.queryParams
       .subscribe(params => { 
-        console.log(`URL CHANGED`, params);
+        // console.log(`URL CHANGED`, params);
         this.fromCurrency = params['fromCurrency'];
         this.setFullName(this.fromCurrency)
         this.urlParams = {...params};
@@ -54,7 +54,7 @@ export class MoreDetailsPageComponent implements OnInit {
     this.fixerExchangeService.getCurrenciesDetails()
     .subscribe({
       next:(res:any)=> { 
-        console.log(`res`,res);
+        // console.log(`res`,res);
         this.currenciesWithNames = res?.symbols;
         this.setFullName(this.fromCurrency);
       },
@@ -75,7 +75,7 @@ export class MoreDetailsPageComponent implements OnInit {
 
     const storedConvertHistory:any =  localStorage.getItem('convertHistory')
     let allCurrencies = JSON.parse(storedConvertHistory);
-    console.log(`allCurrencies`,allCurrencies);
+    // console.log(`allCurrencies`,allCurrencies);
     // Defining the unique cities from the above
     // array by using forEach loop
     let unique_currenies:string[] = [];
