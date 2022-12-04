@@ -19,6 +19,7 @@ export class MoreDetailsPageComponent implements OnInit {
   urlParams:any; 
   currenciesWithNames:string[]; 
   fromCurrency:string; 
+  toCurrency:string; 
   currencyFullName:string; 
   constructor(
     private fixerExchangeService: FixerExchangeService,
@@ -28,11 +29,12 @@ export class MoreDetailsPageComponent implements OnInit {
     this.currencies = [];
     this.currencyConvertHistory = [];
     this.currenciesWithNames = [];
+    this.toCurrency = '';
     this.fromCurrency = '';
     this.currencyFullName = '';
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {  
     this.currencies = this.getMostPopularCurrencies();
     // Todo:: add asyc function
     this.getAvailebleCurrencies(); 
@@ -40,10 +42,12 @@ export class MoreDetailsPageComponent implements OnInit {
       .subscribe(params => { 
         // console.log(`URL CHANGED`, params);
         this.fromCurrency = params['fromCurrency'];
+        this.toCurrency = params['toCurrency'];
         this.setFullName(this.fromCurrency)
         this.urlParams = {...params};
       }
     );
+ 
   }
   
   setFullName(fromCurrency:string|any) { 

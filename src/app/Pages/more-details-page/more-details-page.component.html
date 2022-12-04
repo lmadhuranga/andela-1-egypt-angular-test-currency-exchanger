@@ -3,7 +3,6 @@
     <h1>{{ fromCurrency }} - {{ currencyFullName }}</h1>
     <button (click)="backToHomePage($event)">Back to Home</button>
     <app-currency-convertor [isHomePage]="false" [urlParams]="urlParams" ></app-currency-convertor>
-    <div class="historical-rates-chart">
-        
-    </div>  
+    <app-historical-rates-chart [urlParams]="urlParams" ></app-historical-rates-chart>
+     
 </div> 

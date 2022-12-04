@@ -43,7 +43,7 @@ export class FixerExchangeService {
   
   getHistoryData(historyData:HistoryData) {
     const { toCurrency, fromCurrency, startDate, endDate } = historyData;    
-    return this.http.get(`${this.apiUrl}/timeseries?start_date=2021-12-03&end_date=2022-12-03&base=${fromCurrency}&symbols=${toCurrency}`);
+    return this.http.get(`${this.apiUrl}/timeseries?start_date=${startDate}&end_date=${endDate}&base=${fromCurrency}&symbols=${toCurrency}`);
   } 
   
   getCurrenciesDetails() {    

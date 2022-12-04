@@ -1,1 +1,5 @@
-<p>historical-rates-chart works!</p>
+<div class="historical-rates-chart"> 
+    <ul>
+        <li class="item" *ngFor="let record of historicData; index as i;" >{{record | json}}</li>
+    </ul> 
+</div>
