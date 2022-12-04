@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +11,7 @@ import { CurrencyConvertorComponent } from './Components/currency-convertor/curr
 import { HeaderComponent } from './Components/header/header.component';
 import { HistoricalRatesChartComponent } from './Components/historical-rates-chart/historical-rates-chart.component';
 import { ConvertHistoryComponent } from './convert-history/convert-history.component';
+import { AuthInterceptorService } from './Helpers/auth-interceptor.service';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { ConvertHistoryComponent } from './convert-history/convert-history.compo
     HttpClientModule, 
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
