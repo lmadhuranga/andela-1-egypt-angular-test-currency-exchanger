@@ -1,5 +1,9 @@
 <div class="convert-history">
-    <ul>
-        <li class="item" *ngFor="let record of popularPairs; index as i;" >{{record | json}}</li>
-    </ul> 
+    <hr>
+    <h4>Popular Currency pairs</h4>
+    <div class="row">
+        <div class="col-md-4 item" *ngFor="let record of popularPairs; index as i;" >
+            <h5 class="card-title">{{record}}</h5>
+        </div> 
+    </div>
 </div>

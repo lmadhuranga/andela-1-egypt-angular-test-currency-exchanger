@@ -1,0 +1,7 @@
+.item {
+    background: skyblue;
+    min-height: 41px;
+    text-align: center;
+    padding: 16px;
+    margin: 13px;
+}
