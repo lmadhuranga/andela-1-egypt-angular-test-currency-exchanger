@@ -15,17 +15,40 @@ interface ExchangeFormData {
 export class HomePageComponent implements OnInit {
 
   currencyConvertHistory:any[]; 
+  popularPairs:any[]; 
   constructor( private fixerExchangeService :FixerExchangeService) {
     this.currencyConvertHistory = [];
+    this.popularPairs = [];
   } 
   
-  ngOnInit(): void { 
-  }
+  ngOnInit(): void {  
+  } 
 
   // Todo:: Need to move to HOC method
   onAddToHistory(formData:ExchangeFormData) {
     this.currencyConvertHistory.push(formData);
     // Save in the local storage for future use
-    localStorage.setItem('convertHistory', JSON.stringify(this.currencyConvertHistory))
-  }
+    localStorage.setItem('convertHistory', JSON.stringify(this.currencyConvertHistory));
+    this.popularPairs = this.tofindDuplicates(this.currencyConvertHistory);
+  } 
+
+  tofindDuplicates (historyArr:any) {
+    const pairedArr = historyArr.map((r:any)=> `${r.fromCurrency}-${r.toCurrency}`)
+    const counterObj:any = {};
+    pairedArr.forEach((e:any) => { 
+      if(counterObj.hasOwnProperty(e)) {
+        counterObj[e] = (counterObj[e] + 1)
+      }
+      else {
+        counterObj[e] = 1;
+      }
+    }); 
+    let returnArr = []
+    for (const key in counterObj) {
+      if(counterObj[key]>1) { 
+        returnArr.push(key) 
+      }
+    } 
+    return returnArr;
+  } 
 }

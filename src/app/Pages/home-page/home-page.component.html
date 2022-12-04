@@ -2,5 +2,5 @@
    <app-header></app-header>
    <h1>Currency Exchanger</h1> 
    <app-currency-convertor (addToHistory)="onAddToHistory($event)"  [isHomePage]="true"></app-currency-convertor>
-   <app-convert-history [convertHistory]="currencyConvertHistory"></app-convert-history>
+   <app-convert-history [convertHistory]="currencyConvertHistory" [popularPairs]="popularPairs"></app-convert-history>
 </div>

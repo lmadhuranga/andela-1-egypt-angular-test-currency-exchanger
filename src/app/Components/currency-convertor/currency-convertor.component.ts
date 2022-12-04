@@ -80,8 +80,7 @@ export class CurrencyConvertorComponent implements OnInit {
     const formData:FormData = this.f();
     const { fromCurrency, toCurrency } = formData;
     // Added to history
-    this.convertHistory.unshift({ fromCurrency, toCurrency })
-    console.log(`this.convertHistory`,this.convertHistory);
+    this.convertHistory.unshift({ fromCurrency, toCurrency });
     this.fixerExchangeService.rateConvert(formData)
     .subscribe({
       next:(res:any)=> { 
