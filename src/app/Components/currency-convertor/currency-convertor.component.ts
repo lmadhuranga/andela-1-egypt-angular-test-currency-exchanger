@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
 
 interface Rates 
@@ -33,15 +34,16 @@ export class CurrencyConvertorComponent implements OnInit {
   currencies: string[];
 
   constructor(
-    private fixerExchangeService: FixerExchangeService
+    private fixerExchangeService: FixerExchangeService,
+    private router: Router
   ) { 
     this.exchangeRate = '0.0';
     this.currencies = [];
 
     this.exchangeForm = new FormGroup({
-      exchangeAmount: new FormControl(0, [Validators.required]),
-      fromCurrency: new FormControl('USD', [Validators.required]),
-      toCurrency: new FormControl('AED', [Validators.required]),
+      exchangeAmount: new FormControl(1, [Validators.required]),
+      fromCurrency: new FormControl('EUR', [Validators.required]),
+      toCurrency: new FormControl('USD', [Validators.required]),
     });
   } 
 
@@ -112,6 +114,9 @@ export class CurrencyConvertorComponent implements OnInit {
     console.log(`reditc next page called`);
     // Todo:: redirect to more detils page with 
     // parameters amount base currency, target currency and amount
+    const formData:FormData = this.f();
+    const { fromCurrency, toCurrency, exchangeAmount } = formData; 
+    this.router.navigate(['/more-detials'], { queryParams: { fromCurrency, toCurrency, exchangeAmount }});
   }
  
 }

@@ -9,7 +9,9 @@ import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { MoreDetailsPageComponent } from './Pages/more-details-page/more-details-page.component';
 import { CurrencyConvertorComponent } from './Components/currency-convertor/currency-convertor.component';
 import { HeaderComponent } from './Components/header/header.component';
- 
+import { HistoricalRatesChartComponent } from './Components/historical-rates-chart/historical-rates-chart.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +19,7 @@ import { HeaderComponent } from './Components/header/header.component';
     MoreDetailsPageComponent,
     CurrencyConvertorComponent,
     HeaderComponent,
+    HistoricalRatesChartComponent,
   ],
   imports: [ 
     BrowserModule,
