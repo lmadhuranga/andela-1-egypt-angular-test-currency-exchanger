@@ -31,6 +31,7 @@ interface Payload
 
 export class CurrencyConvertorComponent implements OnInit {
   @Input() currencies:any;
+  @Input() isHomePage:any;
   exchangeForm: FormGroup; 
   exchangeRate: string;
   // convertHistory:[{ fromCurrency: string, toCurrency: string }];
