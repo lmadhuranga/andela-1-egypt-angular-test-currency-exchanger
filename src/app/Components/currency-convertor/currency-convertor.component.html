@@ -7,7 +7,7 @@
             <div>
                 <!-- logic && operator -->
                 <div *ngIf="currencies.length>0; else currencyNotLoaded ">
-                    <select formControlName="fromCurrency" class="from-currency">
+                    <select [attr.disabled]="isHomePage?null:true" formControlName="fromCurrency" class="from-currency">
                         <option *ngFor="let currency of currencies" [value]="currency" >{{currency}}</option>
                     </select>
                 </div>
@@ -40,7 +40,7 @@
         <div class="result">
             {{ exchangeRate | number : '1.2-2' }} {{ f()['toCurrency'] }}
         </div>
-        <div class="submit-btn">
+        <div *ngIf="isHomePage" class="submit-btn">
             <button [disabled]="(f()['exchangeAmount']<1)" type="submit" (click)="redirectToDetialesPage($event)">More detiales</button>
         </div>
         <div class="convert-history">
