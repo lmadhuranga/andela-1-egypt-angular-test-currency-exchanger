@@ -10,7 +10,7 @@ import { MoreDetailsPageComponent } from './Pages/more-details-page/more-details
 import { CurrencyConvertorComponent } from './Components/currency-convertor/currency-convertor.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { HistoricalRatesChartComponent } from './Components/historical-rates-chart/historical-rates-chart.component';
-import { ConvertHistoryComponent } from './convert-history/convert-history.component';
+import { ConvertHistoryComponent } from './Components/convert-history/convert-history.component';
 import { AuthInterceptorService } from './Helpers/auth-interceptor.service';
 
 
