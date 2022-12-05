@@ -1,4 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
+import * as Highcharts from 'highcharts';
+import { HighchartsChartModule } from 'highcharts-angular';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
 
 @Component({
@@ -11,7 +13,21 @@ export class HistoricalRatesChartComponent implements OnInit {
   urlParams:any;
 
   historicData:any[];
-  
+
+  Highcharts = Highcharts;
+  linechart: any = {
+    series: [ { data: [1, 2, 3], },
+    ],
+    xAxis: {
+      categories: ['Jan', 'Feb', 'Mar', ],
+    },
+    chart: {
+      type: 'line',
+    },
+    title: {
+      text: 'Last 12 month history',
+    },
+  };
   constructor(private fixerExchangeService: FixerExchangeService) {
     this.historicData = [];
   }
@@ -37,22 +53,20 @@ export class HistoricalRatesChartComponent implements OnInit {
         }
       } 
     });
-    this.historicData = chartData; 
+    return chartData;  
   }
   
   getHistoryData() { 
     const startDate = this.formatDate(false);
     const endDate = this.formatDate(true);
+    const { toCurrency, fromCurrency } = this.urlParams
     const requestData = {
-      toCurrency : this.urlParams['toCurrency'],
-      fromCurrency: this.urlParams['fromCurrency'],
-      startDate,
-      endDate
+      toCurrency, fromCurrency, startDate, endDate
     }
     this.fixerExchangeService.getHistoryData(requestData)
     .subscribe({
       next:(res:any)=> { 
-        this.formatData(res?.rates);
+        this.historicData = this.formatData(res?.rates);
       },
       error:(error)=>{
         // console.log(`error`,error);
