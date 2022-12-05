@@ -47,8 +47,8 @@
             <div class="col-md-3 ">
                 <h4>{{ f()['exchangeAmount'] }} {{ f()['fromCurrency'] }} = {{ exchangeRate | number : '1.2-2' }} {{ f()['toCurrency'] }}</h4>
             </div>
-            <div class="col-md-3 result">
-                <h4>{{ result | number : '1.2-2' }} {{ f()['toCurrency'] }}</h4>
+            <div class="col-md-4 result">
+                <h4> Result : {{ result | number : '1.2-2' }} {{ f()['toCurrency'] }}</h4>
             </div>
             <div *ngIf="isHomePage" class="col-md-3 ">
                 <button class="btn btn-primary" [disabled]="(f()['exchangeAmount']<1)" type="submit" (click)="redirectToDetialesPage($event)">More detiales</button>

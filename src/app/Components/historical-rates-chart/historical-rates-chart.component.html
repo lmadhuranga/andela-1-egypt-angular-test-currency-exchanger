@@ -1,4 +1,7 @@
 <div class="historical-rates-chart"> 
+    <hr>
+    <h4>Historical Data (base on end of the day each month)</h4>
+    <br>
     <ul>
         <li class="item" *ngFor="let record of historicData ; index as i;" > {{ record['day'] }} Rate {{ record['value']}}</li>
     </ul> 
