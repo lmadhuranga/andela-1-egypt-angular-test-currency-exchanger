@@ -1,8 +1,11 @@
 <div class="more-details-page">
     <app-header></app-header>
-    <h1>{{ fromCurrency }} - {{ currencyFullName }}</h1>
-    <button (click)="backToHomePage($event)">Back to Home</button>
+    <hr>
+    <div class="row">
+        <div class="col-md-8"><h1>{{ fromCurrency }} - {{ currencyFullName }}</h1></div>
+        <div class="col-md-4"><button class="btn btn-primary" (click)="backToHomePage($event)">Back to Home</button></div>
+    </div>
+    <hr>
     <app-currency-convertor [isHomePage]="false" [urlParams]="urlParams" ></app-currency-convertor>
     <app-historical-rates-chart [urlParams]="urlParams" ></app-historical-rates-chart>
-     
 </div> 
