@@ -27,6 +27,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 			request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
 		}
 		request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
+		request = request.clone({ headers: request.headers.set('Access-Control-Allow-Origin', '*') });
 		// handle the API response
 		return next.handle(request)
 		.pipe(
