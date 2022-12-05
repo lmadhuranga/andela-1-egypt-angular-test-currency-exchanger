@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
+
 interface ExchangeFormData {
   toCurrency?: string
   fromCurrency?: string
@@ -12,10 +13,12 @@ interface ExchangeFormData {
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
+
 export class HomePageComponent implements OnInit {
 
   currencyConvertHistory:any[]; 
-  popularPairs:any[]; 
+  popularPairs:any[];
+
   constructor( private fixerExchangeService :FixerExchangeService) {
     this.currencyConvertHistory = [];
     this.popularPairs = [];
@@ -32,6 +35,7 @@ export class HomePageComponent implements OnInit {
     this.popularPairs = this.tofindDuplicates(this.currencyConvertHistory);
   } 
 
+  // Find the duplicated values in array
   tofindDuplicates (historyArr:any) {
     const pairedArr = historyArr.map((r:any)=> `${r.fromCurrency}-${r.toCurrency}`)
     const counterObj:any = {};
@@ -43,12 +47,12 @@ export class HomePageComponent implements OnInit {
         counterObj[e] = 1;
       }
     }); 
-    let returnArr = []
+    let outputDataArr = []
     for (const key in counterObj) {
       if(counterObj[key]>1) { 
-        returnArr.push(key) 
+        outputDataArr.push(key) 
       }
     } 
-    return returnArr;
+    return outputDataArr;
   } 
 }

@@ -2,10 +2,7 @@
     <hr>
     <h4>Historical Data (base on end of the day each month)</h4>
     <br>
-    <ul>
-        <li class="item" *ngFor="let record of historicData ; index as i;" > {{ record['day'] }} Rate {{ record['value']}}</li>
-    </ul>  
-    <highcharts-chart
+    <highcharts-chart *ngIf="linechartOk"
         [Highcharts]="Highcharts"
         [options]="linechart"
         style="width: 100%; height: 400px; display: block;"

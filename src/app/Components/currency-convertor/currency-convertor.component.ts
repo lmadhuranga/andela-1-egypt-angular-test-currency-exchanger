@@ -30,9 +30,14 @@ interface Payload
 })
 
 export class CurrencyConvertorComponent implements OnInit { 
-  @Input() urlParams:any;  
-  @Input() isHomePage:any; 
-  @Output() addToHistory = new EventEmitter<FormData>();
+  @Input()
+  urlParams:any;
+    
+  @Input()
+  isHomePage:any;
+   
+  @Output()
+  addToHistory = new EventEmitter<FormData>();
 
   exchangeForm: FormGroup; 
   currencies:string[]; 
@@ -59,8 +64,7 @@ export class CurrencyConvertorComponent implements OnInit {
   } 
 
  
-  ngOnInit(): void {  
-    // Todo:: need to add async
+  ngOnInit(): void {   
     this.getAvailebleCurrencies(); 
     // if form valu change rest to init state 
     this.exchangeForm.valueChanges.subscribe(selectedValue  => {
@@ -114,9 +118,7 @@ export class CurrencyConvertorComponent implements OnInit {
       toCurrency:fromCurrency
     });
   }
-
- 
-
+  
   redirectToDetialesPage(event:any) {
     event.preventDefault();
     

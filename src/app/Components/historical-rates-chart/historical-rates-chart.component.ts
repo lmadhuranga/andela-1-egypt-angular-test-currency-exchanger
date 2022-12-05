@@ -9,52 +9,58 @@ import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
   styleUrls: ['./historical-rates-chart.component.css']
 })
 export class HistoricalRatesChartComponent implements OnInit {
+  
   @Input()
   urlParams:any;
 
-  historicData:any[];
-
+  historicData:{};
+  linechart:any = {};
+  linechartOk:boolean=false;
   Highcharts = Highcharts;
-  linechart: any = {
-    series: [ { data: [1, 2, 3], },
-    ],
-    xAxis: {
-      categories: ['Jan', 'Feb', 'Mar', ],
-    },
-    chart: {
-      type: 'line',
-    },
-    title: {
-      text: 'Last 12 month history',
-    },
-  };
+ 
   constructor(private fixerExchangeService: FixerExchangeService) {
-    this.historicData = [];
+    this.historicData = {}; 
   }
 
-  ngOnInit(): void { 
-    this.getHistoryData();
+  ngOnInit(): void {  
   }
 
   ngOnChanges() {
     this.getHistoryData()
   }
 
-  formatData(rawData:any) { 
+  // Todo:: need to move to new componetn 
+  // load with @ViewChild
+  getHichartData(rawData:any) { 
     const datesArr = Object.keys(rawData);
+    const fullData:any = []
     const chartData:any = []
+    const yearsMonths:any = []
     datesArr.forEach((day, i) => { 
       if(datesArr.length> (i+1)) {
+        const currentYear = day.split('-')[0];
         const currentMonth = day.split('-')[1];
         const nextDayMonth = datesArr[(i+1)].split('-')[1];
         if(currentMonth!=nextDayMonth) {
           const value = Object.values(rawData[day]).pop(); 
-          chartData.push({value, day})
+          fullData.push({value, day})
+          chartData.push(value)
+          yearsMonths.push(`${currentYear}-${currentMonth}`)
         }
       } 
     });
-    return chartData;  
+     
+    // set chart data
+    const linechartData: any = {
+      series: [ { data: chartData, }, ],
+      xAxis: { categories: yearsMonths, },
+      chart: { type: 'line', },
+      title: { text: 'Last 12 month history', },
+    };  
+    this.linechart = linechartData
+    this.linechartOk = true;
   }
+ 
   
   getHistoryData() { 
     const startDate = this.formatDate(false);
@@ -63,10 +69,11 @@ export class HistoricalRatesChartComponent implements OnInit {
     const requestData = {
       toCurrency, fromCurrency, startDate, endDate
     }
+    
     this.fixerExchangeService.getHistoryData(requestData)
     .subscribe({
-      next:(res:any)=> { 
-        this.historicData = this.formatData(res?.rates);
+      next:(res:any)=> {
+        this.getHichartData(res?.rates); 
       },
       error:(error)=>{
         // console.log(`error`,error);
@@ -84,6 +91,7 @@ export class HistoricalRatesChartComponent implements OnInit {
 
     let month:any = today.getMonth()+1; 
     let year = today.getFullYear();
+    
     if(day<10) 
     {
       day='0'+day;
