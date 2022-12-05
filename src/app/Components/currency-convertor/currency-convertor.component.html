@@ -21,7 +21,7 @@
 
             <div class="col-md-2"> 
                 <label>&nbsp;</label>
-                <button [disabled]="!isHomePage" class="form-control switch-currencies btn btn-primary"  (click)="onSwitchCurrencies($event)" ><= =></button>
+                <button [disabled]="!isHomePage" class="form-control switch-currencies btn btn-primary"  (click)="onSwitchCurrencies($event)" >< = ></button>
             </div>
 
             <div class="col-md-3">
@@ -36,11 +36,13 @@
                 </ng-template>
             </div>
         </div>
+
         <div class="row p-3">
             <div class="col-md-3 ">
                 <button class=" btn btn-primary" type="submit" [disabled]="(f()['exchangeAmount']<1)" >Convert</button>
             </div>
         </div>
+
         <div class="row p-3">
             <div class="col-md-3 ">
                 <h4>{{ f()['exchangeAmount'] }} {{ f()['fromCurrency'] }} = {{ exchangeRate | number : '1.2-2' }} {{ f()['toCurrency'] }}</h4>

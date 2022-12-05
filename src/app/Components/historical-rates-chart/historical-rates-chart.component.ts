@@ -20,6 +20,10 @@ export class HistoricalRatesChartComponent implements OnInit {
     this.getHistoryData();
   }
 
+  ngOnChanges() {
+    this.getHistoryData()
+  }
+
   formatData(rawData:any) { 
     const datesArr = Object.keys(rawData);
     const chartData:any = []

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
 interface ExchangeFormData {
@@ -12,15 +12,17 @@ interface ExchangeFormData {
   templateUrl: './more-details-page.component.html',
   styleUrls: ['./more-details-page.component.css']
 })
-export class MoreDetailsPageComponent implements OnInit {
 
+export class MoreDetailsPageComponent implements OnInit {
+  
   currencies: string[]; 
   currencyConvertHistory:any[]; 
   urlParams:any; 
   currenciesWithNames:string[]; 
-  fromCurrency:string; 
-  toCurrency:string; 
-  currencyFullName:string; 
+  fromCurrency?:string; 
+  toCurrency?:string; 
+  currencyFullName:string;
+
   constructor(
     private fixerExchangeService: FixerExchangeService,
     private activatedRoute: ActivatedRoute,
@@ -34,8 +36,7 @@ export class MoreDetailsPageComponent implements OnInit {
     this.currencyFullName = '';
   }
 
-  ngOnInit(): void {  
-    this.currencies = this.getMostPopularCurrencies();
+  ngOnInit(): void {   
     // Todo:: add asyc function
     this.getAvailebleCurrencies(); 
     this.activatedRoute.queryParams
@@ -71,45 +72,13 @@ export class MoreDetailsPageComponent implements OnInit {
     });
   } 
 
-  onAddToHistory(formData:ExchangeFormData) { 
-    this.currencyConvertHistory.push(formData);
+  onAddToHistory(formData:ExchangeFormData) {  
+    this.urlParams = {...formData};
   }
-
-  getMostPopularCurrencies() {
-
-    const storedConvertHistory:any =  localStorage.getItem('convertHistory')
-    let allCurrencies = JSON.parse(storedConvertHistory);
-    // console.log(`allCurrencies`,allCurrencies);
-    // Defining the unique cities from the above
-    // array by using forEach loop
-    let unique_currenies:string[] = [];
-    let duplicated_currenies:any = {}; 
-    if(allCurrencies.length>0) { 
-      allCurrencies.forEach((c:any) => {
-        const { fromCurrency, toCurrency } = c;
-        if (!unique_currenies.includes(fromCurrency)) {
-          unique_currenies.push(fromCurrency);
-        }
-        else {
-          duplicated_currenies[fromCurrency] = fromCurrency;
-        }
-        
-        if (!unique_currenies.includes(toCurrency)) {
-          unique_currenies.push(toCurrency);
-        }
-        else {
-          duplicated_currenies[toCurrency] = toCurrency;
-        }
-      }); 
-      return Object.keys(duplicated_currenies)
-    }
-    else {
-      return ['EUR', 'USD'] 
-    } 
-  }
-
+  
   backToHomePage(event:any) {
     event.preventDefault();
     this.router.navigate(['/']);
   }
+
 }
