@@ -12,7 +12,7 @@ import { CurrencyConvertorComponent } from './Components/currency-convertor/curr
 import { HeaderComponent } from './Components/header/header.component';
 import { HistoricalRatesChartComponent } from './Components/historical-rates-chart/historical-rates-chart.component';
 import { ConvertHistoryComponent } from './Components/convert-history/convert-history.component';
-import { AuthInterceptorService } from './Helpers/auth-interceptor.service';
+import { AuthInterceptorService } from './Services/auth-interceptor.service';
 
 
 @NgModule({
@@ -32,7 +32,9 @@ import { AuthInterceptorService } from './Helpers/auth-interceptor.service';
     ReactiveFormsModule,
     HighchartsChartModule
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
