@@ -1,12 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
+import { FormData } from 'src/app/Models/iFormData';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
-interface ExchangeFormData {
-  toCurrency?: string
-  fromCurrency?: string
-  exchangeAmount?: number
-}
  
 @Component({
   selector: 'app-more-details-page',
@@ -73,7 +69,7 @@ export class MoreDetailsPageComponent implements OnInit {
     });
   } 
 
-  onAddToHistory(formData:ExchangeFormData) {  
+  onAddToHistory( formData:FormData ) {  
     this.urlParams = {...formData};
   }
   

@@ -1,28 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormData } from 'src/app/Models/iFormData';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
 
-interface Rates 
-{
-  [key: string]: any; 
-  name: string;
-}
-
-interface FormData {
-  toCurrency?: string
-  fromCurrency?: string
-  exchangeAmount?: number
-}
-interface Payload 
-{
-  "base": string,
-  "date": string,
-  "rates": Rates,
-  "success": boolean,
-  "timestamp": Number
-}
-
+ 
 @Component({
   selector: 'app-currency-convertor',
   templateUrl: './currency-convertor.component.html',

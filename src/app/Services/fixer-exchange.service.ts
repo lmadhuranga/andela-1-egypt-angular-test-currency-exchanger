@@ -1,19 +1,9 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';  
-
-interface FormData {
-  toCurrency?: string
-  fromCurrency?: string
-  exchangeAmount?: number
-}
-
-interface HistoryData {
-  toCurrency: string
-  fromCurrency: string
-  startDate: string
-  endDate: string 
-}
+import { FormData } from '../Models/iFormData';
+import { HistoryData } from '../Models/iHistoryData';
+ 
 
 @Injectable({
   providedIn: 'root'

@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormData } from 'src/app/Models/iFormData';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
-
-interface ExchangeFormData {
-  toCurrency?: string
-  fromCurrency?: string
-  exchangeAmount?: number
-}
+ 
 
 @Component({
   selector: 'app-home-page',
@@ -28,7 +24,7 @@ export class HomePageComponent implements OnInit {
   } 
 
   // Todo:: Need to move to HOC method
-  onAddToHistory(formData:ExchangeFormData) {
+  onAddToHistory( formData:FormData ) {
     this.currencyConvertHistory.push(formData);
     // Save in the local storage for future use
     localStorage.setItem('convertHistory', JSON.stringify(this.currencyConvertHistory));
