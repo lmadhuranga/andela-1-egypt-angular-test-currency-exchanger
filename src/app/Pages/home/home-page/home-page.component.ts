@@ -39,6 +39,7 @@ export class HomePageComponent implements OnInit {
   tofindDuplicates (historyArr:any) {
     const pairedArr = historyArr.map((r:any)=> `${r.fromCurrency}-${r.toCurrency}`)
     const counterObj:any = {};
+    
     pairedArr.forEach((e:any) => { 
       if(counterObj.hasOwnProperty(e)) {
         counterObj[e] = (counterObj[e] + 1)
@@ -47,6 +48,7 @@ export class HomePageComponent implements OnInit {
         counterObj[e] = 1;
       }
     }); 
+
     let outputDataArr = []
     for (const key in counterObj) {
       if(counterObj[key]>1) { 

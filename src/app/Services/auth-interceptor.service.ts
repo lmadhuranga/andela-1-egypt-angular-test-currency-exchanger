@@ -18,6 +18,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 		this.token  = environment.FixerApiKey;
 		//console.log(this.token);
 
+		// Todo:: need to set in evnironment variable
 		if (this.token) {
 			request = request.clone({ headers: request.headers.set('apikey', this.token) });
 		}

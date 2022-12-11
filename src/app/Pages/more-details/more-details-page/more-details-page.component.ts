@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { throwError } from 'rxjs';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
 interface ExchangeFormData {
   toCurrency?: string
@@ -64,7 +65,7 @@ export class MoreDetailsPageComponent implements OnInit {
         this.setFullName(this.fromCurrency);
       },
       error:(error)=>{
-        // console.log(`error`,error);
+        // console.log(`error`,error); )
       },
       complete:()=>{
         // console.log(`completed`);
@@ -79,6 +80,10 @@ export class MoreDetailsPageComponent implements OnInit {
   backToHomePage(event:any) {
     event.preventDefault();
     this.router.navigate(['/']);
+  }
+
+  onDestroy() {
+    console.log(`On destory`);
   }
 
 }
