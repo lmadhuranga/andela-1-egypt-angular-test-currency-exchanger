@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router'; 
 import { FormData } from 'src/app/Models/iFormData';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
  
@@ -77,9 +76,6 @@ export class MoreDetailsPageComponent implements OnInit {
     event.preventDefault();
     this.router.navigate(['/']);
   }
-
-  onDestroy() {
-    console.log(`On destory`);
-  }
+  
 
 }

@@ -33,9 +33,9 @@ export class HistoricalRatesChartComponent implements OnInit {
   // load with @ViewChild
   getHichartData(rawData:any) { 
     const datesArr = Object.keys(rawData);
-    const fullData:any = []
-    const chartData:any = []
-    const yearsMonths:any = []
+    const fullData:any = [];
+    const chartData:any = [];
+    const yearsMonths:any = [];
     datesArr.forEach((day, i) => { 
       if(datesArr.length> (i+1)) {
         const currentYear = day.split('-')[0];

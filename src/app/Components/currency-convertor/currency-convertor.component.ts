@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { FormData } from 'src/app/Models/iFormData';
 import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
 
- 
 @Component({
   selector: 'app-currency-convertor',
   templateUrl: './currency-convertor.component.html',

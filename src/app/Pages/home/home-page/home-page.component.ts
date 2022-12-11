@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormData } from 'src/app/Models/iFormData';
-import { FixerExchangeService } from 'src/app/Services/fixer-exchange.service';
- 
-
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -15,13 +11,12 @@ export class HomePageComponent implements OnInit {
   currencyConvertHistory:any[]; 
   popularPairs:any[];
 
-  constructor( private fixerExchangeService :FixerExchangeService) {
+  constructor() {
     this.currencyConvertHistory = [];
     this.popularPairs = [];
   } 
   
-  ngOnInit(): void {  
-  } 
+  ngOnInit(): void { } 
 
   // Todo:: Need to move to HOC method
   onAddToHistory( formData:FormData ) {
